@@ -1,0 +1,278 @@
+<!doctype html>
+<html><head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function updateClock() {
+        var clocks = document.getElementsByClassName('clock');
+        var now = new Date();
+        var time = now.toLocaleTimeString();
+
+        for (var i = 0; i < clocks.length; i++) {
+            clocks[i].textContent = time;
+        }
+    }
+
+    setInterval(updateClock, 1000);
+
+    function getdate() {
+        var datee = document.getElementsByClassName('datenow');
+        var now = new Date();
+        var datt = now.toLocaleDateString();
+
+        for (var i = 0; i < datee.length; i++) {
+            datee[i].textContent = datt;
+        }
+
+        $('#CarAvailability').DataTable({
+            "paging": true,
+            "ordering": true,
+            "info": false,
+            "pagingType": "simple_numbers"
+        });
+    }
+
+    $(document).ready(function () {
+        getdate();
+    });
+
+    var req = Sys.WebForms.PageRequestManager.getInstance();
+    req.add_endRequest(function () {
+        getdate();
+    });
+	
+	function btnAttendance_Click(buttonId) {
+    var button = document.getElementById("Login" + buttonId);
+	var button2 = document.getElementById("Logout" + buttonId);
+	button2.disabled=false;
+    button.disabled = true;
+}
+function btnLeave_Click(buttonId) {
+    var button = document.getElementById("Logout" + buttonId);
+    button.disabled = true;
+}
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+.mr-auto, .mx-auto {
+    margin-left: auto!important;
+	margin-right: 0px!important;
+}
+.navbar-expand-lg {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+
+.navbar {
+direction:rtl;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background-color: black;
+}
+    .btn {
+        font-size: medium;
+        color: #000!important;
+        background-image: none!important;
+        border: 5px solid #FFF;
+        border-radius: 0;
+        box-shadow: none!important;
+        -webkit-transition: background-color .15s, border-color .15s, opacity .15s;
+        -o-transition: background-color .15s, border-color .15s, opacity .15s;
+        transition: background-color .15s, border-color .15s, opacity .15s;
+        vertical-align: middle;
+        margin: 0;
+        position: relative;
+    }
+	.text-md-left {
+    text-align: right!important;
+}
+	.table{
+	margin:75px 0px;
+	}
+	.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6 !important;
+}
+.table th {
+   background-color:gray !important;
+}
+footer{
+background-color:black !important;
+color: white !important;
+direction: rtl;
+}
+</style>
+</head>
+<body>
+<!--Main Navigation-->
+<header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark default-color">
+    <a class="navbar-brand" href="#"><strong>قسم شؤون الموظفين</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">الصفحة الرئيسية <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">الشؤون الادارية</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">الدعم الفني</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">قسم الاعلام</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link"><i class="fab fa-facebook-f"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fab fa-twitter"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fab fa-instagram"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</header>
+<!--Main Navigation-->
+<div class="container">
+
+    <table id="CarAvailability" class="table table-border"	style="direction:rtl;text-align:center;width:100%;">
+        <thead>
+            <tr>
+                <th>إسم الموظف</th>
+                <th>التاريخ</th>
+                <th>الوقت</th>
+                <th>تسجيل حضور</th>
+                <th>تسجيل خروج</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td>
+                   Belal 
+                    </td>
+                    <td>
+                        <span class="datenow"></span>
+                    </td>
+                    <td>
+                        <span class="clock"></span>
+                    </td>
+                    <td>
+                        <button id="Login1" class="btn btn-success" onclick="btnAttendance_Click(1);">تسجيل الحضور</button>
+                    </td>
+                    <td>
+                        <button id="Logout1" disabled="true" class="btn btn-danger" onclick="btnLeave_Click(1);">تسجيل الإنصراف</button>
+                    </td>
+                </tr>
+				 <tr>
+                    <td>
+                   Omar 
+                    </td>
+                    <td>
+                        <span class="datenow"></span>
+                    </td>
+                    <td>
+                        <span class="clock"></span>
+                    </td>
+                    <td>
+                        <button id="Login2" class="btn btn-success" onclick="btnAttendance_Click(2);">تسجيل الحضور</button>
+                    </td>
+                    <td>
+                        <button id="Logout2" disabled="true" class="btn btn-danger" onclick="btnLeave_Click(2);">تسجيل الإنصراف</button>
+                    </td>
+                </tr>
+				 <tr>
+                    <td>
+                  Ahmad
+                    </td>
+                    <td>
+                        <span class="datenow"></span>
+                    </td>
+                    <td>
+                        <span class="clock"></span>
+                    </td>
+                    <td>
+                        <button id="Login3" class="btn btn-success" onclick="btnAttendance_Click(3);">تسجيل الحضور</button>
+                    </td>
+                    <td>
+                        <button id="Logout3" disabled="true" class="btn btn-danger" onclick="btnLeave_Click(3);">تسجيل الإنصراف</button>
+                    </td>
+                </tr>
+				 <tr>
+                    <td>
+                   Mhmd 
+                    </td>
+                    <td>
+                        <span class="datenow"></span>
+                    </td>
+                    <td>
+                        <span class="clock"></span>
+                    </td>
+                    <td>
+                        <button id="Login4" class="btn btn-success" onclick="btnAttendance_Click(4);">تسجيل الحضور</button>
+                    </td>
+                    <td>
+                        <button id="Logout4" disabled="true" class="btn btn-danger" onclick="btnLeave_Click(4);">تسجيل الإنصراف</button>
+                    </td>
+                </tr>
+         
+        </tbody>
+    </table>
+    <label id="lblError" style="display: none;"></label>
+</div>
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+  
+	
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2023 Copyright:All Rights Reserved.
+  
+  </div>
+  <p class="text-center">Google Chrome, IE 10+ , Firefox, Opera and Safari</p>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
